@@ -57,7 +57,6 @@ void initSnake(){
 
 }
 
-
 int checkMovSnake(int buttonP){
 	if(ToucheEnAttente()){
 		switch(Touche()){
