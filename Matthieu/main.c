@@ -3,12 +3,12 @@
 #include<graph.h>
 #define ligneMax 40
 #define colonneMax 60
-#define CYCLE 100000L
+#define CYCLE 50000L
 
 int coactux = (colonneMax/2),
 coactuy = (ligneMax/2);
 
-
+/*------------------------------------MAIN------------------------------------*/
 int main()
 {	couleur fond;
 	int map[ligneMax][colonneMax];
@@ -19,23 +19,22 @@ int main()
 
 
 	InitialiserGraphique();
-	CreerFenetre(10,10,colonneMax*10+20,ligneMax*10+80);
-	EffacerEcran(CouleurParComposante(0, 0, 0));
-	ChoisirCouleurDessin(CouleurParNom("green"));
-    RemplirRectangle(10,10,colonneMax*10,ligneMax*10);					/*RemplirRectangle(int x,int y,int l,int h);*/
+
+	CreerFenetre(10,10,colonneMax*10+20,ligneMax*10+80); 		/*creation fenetre*/
+	EffacerEcran(CouleurParComposante(0, 0, 0));				/*coloration du fond en noir*/						
+	ChoisirCouleurDessin(CouleurParNom("green"));				/*selection de la couleur*/
+    RemplirRectangle(10,10,colonneMax*10,ligneMax*10);			/*RemplirRectangle(int x,int y,int l,int h);*/
 	initSnake();
 
-	for (;;)
+	for (;;)													/*début du jeu*/
 	{
-			if (ToucheEnAttente())
+			if (ToucheEnAttente())								/*verifie si il y a une touche dans le tampon*/
 			{
-				buttonP = checkMovSnake(buttonP);
+				buttonP = checkMovSnake(buttonP);				/*atribue a buttonP la derniere touche préssé*/
 			}
 
 		if (Microsecondes()>suivant)
-		{	
-
-
+		{
 			movSnake(buttonP);
 			actuFenetre();
 
@@ -50,16 +49,19 @@ int main()
 
 	return EXIT_SUCCESS;
 }
+/*------------------------------------initSnake------------------------------------*/
 
 void initSnake(){
 	ChoisirCouleurDessin(CouleurParNom("black"));
-	RemplirRectangle(coactux*10,coactuy*10,10,10);
+	RemplirRectangle(coactux*10,coactuy*10,10,10);				/*place le snake au centre afin de commencer */
 
 }
+/*------------------------------------checkMovSnake------------------------------------*/
 
 int checkMovSnake(int buttonP){
+/*cette fonction a pour usage */
 	if(ToucheEnAttente()){
-		switch(Touche()){
+		switch(Touche()){			
 			case XK_Left :
 			buttonP = XK_Left;break;
 			case XK_Right :
@@ -75,6 +77,7 @@ int checkMovSnake(int buttonP){
 
 	return buttonP;
 }
+/*------------------------------------movSnake------------------------------------*/
 
 void movSnake(int buttonP){
 
@@ -99,7 +102,7 @@ void movSnake(int buttonP){
 }
 
 
-
+/*------------------------------------actuFenetre------------------------------------*/
 void actuFenetre(){
 
 	ChoisirCouleurDessin(CouleurParNom("green"));
