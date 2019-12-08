@@ -91,7 +91,28 @@ void afficherSerpent(Serpent *serpent){
 		actuel = actuel->suivant;
 	}
 	printf("NULL\n");
+	//printf("%d, %d", xfin, yfin);
 }
+
+/*-----> chercher dernier élément de la liste <-----*/
+void dernier(Serpent *serpent){
+	int xfin, yfin;					//Initialisation des coordonnées du dernier corps
+	if (serpent == NULL){			//Erreur si il n'y a pas de corps
+		exit(EXIT_FAILURE);
+	}
+
+	Corps *actuel = serpent->premier;		//On initialise le pointeur de la liste chaînée
+
+	while (actuel->suivant != NULL){		//Tant que le corps suivant n'est pas NULL (fin de la liste chaînée)
+		//printf("%d,%d -> ", actuel->cox, actuel->coy); -- test popur afficher
+		actuel = actuel->suivant;			//On avance dans la liste
+	}
+	xfin = actuel->cox;				//On assigne les coordonnées du dernier corps
+	yfin = actuel->coy;
+	printf("\n%d,%d fin\n", xfin, yfin);	//Affichage des coordonnées du corps
+}
+
+
 
 int main(){
 	Serpent *leSerpent = initialisation();
@@ -108,7 +129,8 @@ int main(){
 	suppression(leSerpent);
 
 	afficherSerpent(leSerpent);
+	dernier(leSerpent);
 	return EXIT_SUCCESS;
 }
 
-//gcc test_graph.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph
+//gcc serpent.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph
