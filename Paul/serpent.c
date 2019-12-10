@@ -112,6 +112,19 @@ void dernier(Serpent *serpent){
 	printf("\n%d,%d fin\n", xfin, yfin);	//Affichage des coordonnées du corps
 }
 
+/*-----> chercher premier élément de la liste <-----*/
+void premier(Serpent *serpent){
+	int xdeb, ydeb;					//Initialisation des coordonnées du dernier corps
+	if (serpent == NULL){			//Erreur si il n'y a pas de corps
+		exit(EXIT_FAILURE);
+	}
+
+	Corps *actuel = serpent->premier;		//On initialise le pointeur de la liste chaînée
+
+	xdeb = actuel->cox;					//On assigne les coordonnées du dernier corps
+	ydeb = actuel->coy;
+	printf("\n%d,%d deb\n", xdeb, ydeb);	//Affichage des coordonnées du corps
+}
 
 
 int main(){
@@ -129,6 +142,7 @@ int main(){
 	suppression(leSerpent);
 
 	afficherSerpent(leSerpent);
+	premier(leSerpent);
 	dernier(leSerpent);
 	return EXIT_SUCCESS;
 }
