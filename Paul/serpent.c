@@ -13,6 +13,11 @@ struct Serpent{
 	Corps *premier;				//pointe vers le premier élément
 };
 
+typedef struct Tampon Tampon;
+struct Tampon{
+	int tcox, tcoy;
+}
+
 /*-----> Initialisation <-----*/
 Serpent *initialisation(){			//on crée la structure de contrôle Serpent
 	Serpent *serpent = malloc(sizeof(*serpent));	//On alloue dynamiquement la structure de contrôle
@@ -126,6 +131,14 @@ void premier(Serpent *serpent){
 	printf("\n%d,%d deb\n", xdeb, ydeb);	//Affichage des coordonnées du corps
 }
 
+void deplacement(){				//inverser coordonnées
+	tamponx = actuel->cox;		//tamponx --> tampon actuel
+	tampony = actuel->coy;
+	tamponsx = suivant->cox;	//tamponsx --> tampon suivant
+	tamponsy = suivant->coy;
+	suivant->cox = tamponx;
+	suivant->coy = tampony;
+}
 
 int main(){
 	Serpent *leSerpent = initialisation();

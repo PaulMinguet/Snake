@@ -18,16 +18,16 @@ int main()
     EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Snake", 2)/2, (ligneMax*10+80)/10, "Snake", 2);		//TailleChaineEcran("Snake", 2)/2 : prend la moitié de la taille en pixel de "Snake"
     ChoisirCouleurDessin(CouleurParComposante(218, 165, 32));
     EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2, (ligneMax*10+80)/5, "Jouer", 2);
- 	
+
+ 	while (1 != 0){
  	while(!SourisCliquee()) {}
- 	SourisPosition();
- 	//if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Snake", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Snake", 2)/2 && _Y >= (ligneMax*10+80)/10){
- 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Jouer", 2)/2 && _Y >= (ligneMax*10+80)/5-20 && _Y <= (ligneMax*10+80)/5){
- 		/*EffacerEcran(CouleurParNom("white"));
- 		EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Snake", 2)/2, (ligneMax*10+80)/2, "Snake", 2);*/
- 		system("/home/paul/IUT/PT11_APL2019/Matthieu/main.c");
- 	} else if (_X != -1 || _Y != -1){}
- 	Touche();
+	 	SourisPosition();
+	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Jouer", 2)/2 && _Y >= (ligneMax*10+80)/5-20 && _Y <= (ligneMax*10+80)/5){
+	 		EffacerEcran(CouleurParNom("white"));
+	 		EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Clic !", 2)/2, (ligneMax*10+80)/2, "Clic !", 2);
+	 		system("/home/paul/IUT/PT11_APL2019/Matthieu/main.c");
+	 	}
+	}
 	FermerGraphique();
 	return EXIT_SUCCESS;
 }
