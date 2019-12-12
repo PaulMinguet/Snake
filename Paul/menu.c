@@ -24,8 +24,8 @@ int main()
 	 	SourisPosition();
 	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Jouer", 2)/2 && _Y >= (ligneMax*10+80)/5-20 && _Y <= (ligneMax*10+80)/5){
 	 		EffacerEcran(CouleurParNom("white"));
-	 		EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Clic !", 2)/2, (ligneMax*10+80)/2, "Clic !", 2);
-	 		system("/home/paul/IUT/PT11_APL2019/Matthieu/main.c");
+	 		FermerGraphique();
+	 		system("/home/paul/IUT/PT11_APL2019/Matthieu/a.out");
 	 	}
 	}
 	FermerGraphique();

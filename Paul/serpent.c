@@ -13,10 +13,15 @@ struct Serpent{
 	Corps *premier;				//pointe vers le premier élément
 };
 
+typedef struct Coordonnees Coordonnees;
+struct Coordonnees{
+	int x, y;
+};
+
 typedef struct Tampon Tampon;
 struct Tampon{
 	int tcox, tcoy;
-}
+};
 
 /*-----> Initialisation <-----*/
 Serpent *initialisation(){			//on crée la structure de contrôle Serpent
@@ -28,7 +33,7 @@ Serpent *initialisation(){			//on crée la structure de contrôle Serpent
 	}
 
 	corps->cox = 20;			//on défini les coordonnées cox et coy de base
-	corps->coy = 30;
+	corps->coy = 26;
 	corps->suivant = NULL;		//on "termine" la liste chaînée qui mesure un élément
 	serpent->premier = corps;		//le premier élément est corps
 
@@ -100,8 +105,8 @@ void afficherSerpent(Serpent *serpent){
 }
 
 /*-----> chercher dernier élément de la liste <-----*/
-void dernier(Serpent *serpent){
-	int xfin, yfin;					//Initialisation des coordonnées du dernier corps
+Coordonnees dernier(Serpent *serpent){
+	Coordonnees cofin;					//Initialisation des coordonnées du dernier corps
 	if (serpent == NULL){			//Erreur si il n'y a pas de corps
 		exit(EXIT_FAILURE);
 	}
@@ -112,51 +117,75 @@ void dernier(Serpent *serpent){
 		//printf("%d,%d -> ", actuel->cox, actuel->coy); -- test popur afficher
 		actuel = actuel->suivant;			//On avance dans la liste
 	}
-	xfin = actuel->cox;				//On assigne les coordonnées du dernier corps
-	yfin = actuel->coy;
-	printf("\n%d,%d fin\n", xfin, yfin);	//Affichage des coordonnées du corps
+	cofin.x = actuel->cox;				//On assigne les coordonnées du dernier corps
+	cofin.y = actuel->coy;
+
+	return cofin;
 }
 
 /*-----> chercher premier élément de la liste <-----*/
-void premier(Serpent *serpent){
-	int xdeb, ydeb;					//Initialisation des coordonnées du dernier corps
+Coordonnees premier(Serpent *serpent){
+	Coordonnees codeb;					//Initialisation des coordonnées du dernier corps
 	if (serpent == NULL){			//Erreur si il n'y a pas de corps
 		exit(EXIT_FAILURE);
 	}
 
 	Corps *actuel = serpent->premier;		//On initialise le pointeur de la liste chaînée
 
-	xdeb = actuel->cox;					//On assigne les coordonnées du dernier corps
-	ydeb = actuel->coy;
-	printf("\n%d,%d deb\n", xdeb, ydeb);	//Affichage des coordonnées du corps
+	codeb.x = actuel->cox;					//On assigne les coordonnées du dernier corps
+	codeb.y = actuel->coy;
+
+	return codeb;
 }
 
-void deplacement(){				//inverser coordonnées
+void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){				//inverser coordonnées
+	int tamponx, tampony, tamponsx, tamponsy;
+	Corps *actuel = serpent->premier;
+	Corps *suivant = suivant;
 	tamponx = actuel->cox;		//tamponx --> tampon actuel
 	tampony = actuel->coy;
-	tamponsx = suivant->cox;	//tamponsx --> tampon suivant
-	tamponsy = suivant->coy;
-	suivant->cox = tamponx;
-	suivant->coy = tampony;
+	actuel->cox = nouvCox;
+	actuel->coy = nouvCoy;
+	for(;actuel->suivant != NULL;){
+		if(actuel->suivant == NULL){break;}
+		actuel = actuel->suivant;
+		tamponsx = actuel->cox;	//tamponsx --> tampon suivant
+		tamponsy = actuel->coy;
+		actuel->cox = tamponx;
+		actuel->coy = tampony;
+		if(actuel->suivant == NULL){break;}
+		actuel = actuel->suivant;
+		tamponx = actuel->cox;
+		tampony = actuel->coy;
+		actuel->cox = tamponsx;
+		actuel->coy = tamponsy;
+
+	}
 }
 
 int main(){
+	Coordonnees tete;
+	Coordonnees queue;
 	Serpent *leSerpent = initialisation();
+	
+	tete = premier(leSerpent);
+	insertionFin(leSerpent, tete.x, tete.y+1);
+	insertionFin(leSerpent, tete.x, tete.y+2);
+	insertionFin(leSerpent, tete.x, tete.y+3);
+	insertionFin(leSerpent, tete.x, tete.y+4);
+	insertionFin(leSerpent, tete.x, tete.y+5);
+	insertionFin(leSerpent, tete.x, tete.y+6);
+	insertionFin(leSerpent, tete.x, tete.y+7);
+	insertionFin(leSerpent, tete.x, tete.y+8);
+	insertionFin(leSerpent, tete.x, tete.y+9);
+	queue = dernier(leSerpent);
+	printf("queue Avant : %d %d\n", queue.x, queue.y);
+	deplacement(leSerpent, 20, 361);
+	queue = dernier(leSerpent);
 
-	insertionFin(leSerpent, 20, 30+1);
-	insertionFin(leSerpent, 20, 30+2);
-	insertionFin(leSerpent, 20, 30+3);
-	insertionFin(leSerpent, 20, 30+4);
-	insertionFin(leSerpent, 20, 30+5);
-	insertionFin(leSerpent, 20, 30+6);
-	insertionFin(leSerpent, 20, 30+7);
-	insertionFin(leSerpent, 20, 30+8);
-	insertionFin(leSerpent, 20, 30+9);
-	suppression(leSerpent);
-
+	printf("tete : %d %d\n",tete.x, tete.y);
+	printf("queue : %d %d\n", queue.x, queue.y);
 	afficherSerpent(leSerpent);
-	premier(leSerpent);
-	dernier(leSerpent);
 	return EXIT_SUCCESS;
 }
 
