@@ -1,3 +1,13 @@
+/**************************************************************************************/
+/**************************************************************************************/
+/****************************************MAIN.C****************************************/
+/***********************************PROJET SNAKE 2019**********************************/
+/********************************IUT UPEC FONTAINEBLEAU********************************/
+/********************************** MATTHIEU CARRICO***********************************/
+/*************************************PAUL MINGUET*************************************/
+/**************************************************************************************/
+/**************************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <graph.h>
@@ -6,6 +16,7 @@
 #define ligneMax 40
 #define colonneMax 60
 #define CYCLE 50000L
+#define proporpix 10
 
 int coactux = (colonneMax/2),
 coactuy = (ligneMax/2);
@@ -28,15 +39,15 @@ Serpent *initSnake(){
 	insertionFin(leSerpent, tete.x, tete.y+7);
 	insertionFin(leSerpent, tete.x, tete.y+8);
 	insertionFin(leSerpent, tete.x, tete.y+9);
-	RemplirRectangle(tete.x*10,tete.y*10,10,10);				/*place le snake au centre afin de commencer */
-
+	RemplirRectangle(tete.x*proporpix,tete.y*proporpix,proporpix,proporpix);				
 	return leSerpent;
 
 }
 /*------------------------------------checkMovSnake------------------------------------*/
 
 int checkMovSnake(int buttonP){
-/*cette fonction a pour usage */
+/*cette fonction a pour usage d'associer a la variable buttonP
+la valeur de la derniere touche préssée*/
 	if(ToucheEnAttente()){
 		switch(Touche()){			
 			case XK_Left :
@@ -57,7 +68,8 @@ int checkMovSnake(int buttonP){
 /*------------------------------------movSnake------------------------------------*/
 
 Coordonnees movSnake(int buttonP,Coordonnees coactu){
-
+	/*cette donction permet de changer la direction du serpent
+	soustrayant/additionant les valeurs d'une variable de type coordoonnees*/
 
 	if (buttonP == XK_Left)
 	{	
@@ -81,18 +93,21 @@ Coordonnees movSnake(int buttonP,Coordonnees coactu){
 }
 
 
-/*------------------------------------actuFenetre------------------------------------*/
+/*------------------------------------initialise la Fenetre------------------------------------*/
 void initAffichage(){
 	ChoisirCouleurDessin(CouleurParNom("grey"));
-	RemplirRectangle(10,10,colonneMax*10,ligneMax*10);
-	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));
-	RemplirRectangle(20,20,colonneMax*10-20,ligneMax*10-20);
+	RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);
+	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));
+	RemplirRectangle(20,20,colonneMax*proporpix-20,ligneMax*proporpix-20);
 }
+/*------------------------------------actualise l'affichage------------------------------------*/
 void actuAffichage(Coordonnees tete,Coordonnees queue){
+	/*actualise la position de la tete du snake*/
 	ChoisirCouleurDessin(CouleurParNom("black"));
-	RemplirRectangle(tete.x*10,tete.y*10,10,10);
-	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));
-	RemplirRectangle(queue.x*10,queue.y*10,10,10);
+	RemplirRectangle(tete.x*proporpix,tete.y*proporpix,proporpix,proporpix);
+	/*efface la derniere valeur de la queue du snake*/
+	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));
+	RemplirRectangle(queue.x*proporpix,queue.y*proporpix,proporpix,proporpix);
 
 
 
@@ -100,14 +115,14 @@ void actuAffichage(Coordonnees tete,Coordonnees queue){
 
 /*------------------------------------Collisions Mur----------------------------------*/
 int collisionsmurs(Coordonnees tete){
-	if(tete.x <= 10 || tete.x >= colonneMax || tete.y <= 1 || tete.y >= ligneMax){
+	if(tete.x <= proporpix || tete.x >= colonneMax || tete.y <= 1 || tete.y >= ligneMax){
 		fin = 1;
-		EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*10+80)/2, "Game Over", 2);
-		EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Appuyez sur une touche pour quitter", 1)/2, (ligneMax*10+80)/2+20, "Appuyez sur une touche pour quitter", 1);
+		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*proporpix+80)/2, "Game Over", 2);
+		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur une touche pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur une touche pour quitter", 1);
 	}
 }
 
-/*------------------------------------Collisions Mur----------------------------------*/
+/*------------------------------------Pause----------------------------------*/
 /*int pause(){
 	if (buttonP == XK_Space){
 		fin = !fin;
@@ -121,27 +136,24 @@ int main()
 	couleur fond;
 	Coordonnees tete, queue;
 	int map[ligneMax][colonneMax];
-
 	int buttonP = XK_Right;
-	
 	long suivant= Microsecondes()+CYCLE;
-
 
 	InitialiserGraphique();
 	tete.x = 20;
 	tete.y = 26;
-	CreerFenetre(10,10,colonneMax*10+20,ligneMax*10+80); 		/*creation fenetre*/
-	EffacerEcran(CouleurParComposante(0, 0, 0));				/*coloration du fond en noir*/						
-	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));				/*selection de la couleur*/
-    RemplirRectangle(10,10,colonneMax*10,ligneMax*10);			/*RemplirRectangle(int x,int y,int l,int h);*/
+	CreerFenetre(proporpix,proporpix,colonneMax*proporpix+20,ligneMax*proporpix+80); 		/*creation fenetre*/
+	EffacerEcran(CouleurParComposante(0, 0, 0));				                            /*coloration du fond en noir*/						
+	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));				        /*selection de la couleur*/
+    RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);			/*RemplirRectangle(int x,int y,int l,int h);*/
 	Serpent *leSerpent = initSnake();
 	initAffichage();
 
-	for (;fin != 1;)													/*début du jeu*/
+	for (;fin != 1;)													                   /*début du jeu*/
 	{
-			if (ToucheEnAttente())								/*verifie si il y a une touche dans le tampon*/
+			if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
 			{
-				buttonP = checkMovSnake(buttonP);				/*atribue a buttonP la derniere touche préssé*/
+				buttonP = checkMovSnake(buttonP);				                           /*attribue a buttonP la derniere touche préssé*/
 			}
 
 		if (Microsecondes()>suivant)
@@ -153,15 +165,8 @@ int main()
 
 			suivant= Microsecondes()+CYCLE;
 		}
-		collisionsmurs(tete);
+		collisionsmurs(tete);w
 	}
-
-
-
 	Touche();
-
-
 	return EXIT_SUCCESS;
 }
-
-//gcc main.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph
