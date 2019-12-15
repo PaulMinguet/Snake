@@ -14,15 +14,10 @@
 #include <time.h>
 #include "serpent.h"
 
-#define ligneMax 40
-#define colonneMax 60
-#define CYCLE 50000L
-#define proporpix 10
-#define QUANTITEPOMME 5
 
 int coactux = (colonneMax/2),
 coactuy = (ligneMax/2);
-int fin = 0;
+
 
 /*------------------------------------initSnake------------------------------------*/
 
@@ -53,13 +48,39 @@ la valeur de la derniere touche préssée*/
 	if(ToucheEnAttente()){
 		switch(Touche()){			
 			case XK_Left :
-			buttonP = XK_Left;break;
+			if (buttonP == XK_Right)
+			{
+				buttonP == XK_Right;break;
+			}else{
+				buttonP = XK_Left;break;
+			}
+			
 			case XK_Right :
-			buttonP = XK_Right;break;
+			if (buttonP == XK_Left)
+			{
+				buttonP == XK_Left;break;
+			}else{
+				buttonP = XK_Right;break;
+			}
+			
 			case XK_Up :
-			buttonP = XK_Up;break;
+			if (buttonP == XK_Down)
+			{
+				buttonP == XK_Up;break;
+			}else{
+				buttonP = XK_Up;break;
+			}
+
+		
 			case XK_Down :
-			buttonP = XK_Down;break;
+			if (buttonP == XK_Up)
+			{
+				buttonP == XK_Up;break;
+			}else{
+				buttonP = XK_Down;break;
+			}
+
+			
 		}
 		
 	}
@@ -117,8 +138,8 @@ void actuAffichage(Coordonnees tete,Coordonnees queue){
 
 /*------------------------------------Collisions Mur----------------------------------*/
 int collisionsmurs(Coordonnees tete){
+	int fin = 0;
 	if(tete.x <= 2 || tete.x >= colonneMax-1 || tete.y <= 2 || tete.y >= ligneMax-1){
-		int fin = 0;
 		fin = 1;
 		ChoisirCouleurDessin(CouleurParNom("black"));
 		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*proporpix+80)/2, "Game Over", 2);
@@ -148,6 +169,7 @@ int main()
 	srand(time(NULL));	
 	tete.x = 20;
 	tete.y = 26;
+	int fin =0;
 
 	for (x = 0; x < ligneMax; ++x)
 	{
@@ -197,6 +219,8 @@ int main()
 			tete = movSnake(buttonP,tete);
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
+			serpentCannibale(leSerpent,tete.x,tete.y);
+
 
 			if (pommes[tete.x][tete.y] == 1)
 			{
@@ -227,14 +251,14 @@ int main()
 
 				suivant= Microsecondes()+CYCLE;
 			}
-			collisionsmurs(tete);
+			fin = collisionsmurs(tete);
 		}
 		if(fin == 1){
 		while (1){
 			if(Touche() == XK_q){
 				printf("p\n");
 				FermerGraphique();
-				break;
+				return EXIT_SUCCESS;
 			}else{}
 		}
 	}

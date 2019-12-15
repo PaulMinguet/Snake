@@ -112,6 +112,38 @@ void afficherSerpent(Serpent *serpent){
 																//printf("%d, %d", xfin, yfin);
 }
 
+void serpentCannibale(Serpent *serpent, int cosx, int cosy){
+	if (serpent == NULL){
+		exit(EXIT_FAILURE);
+	}
+	Corps *actuel = serpent->premier;
+	actuel = actuel->suivant;
+
+	while (actuel != NULL){
+		if (actuel->cox == cosx && actuel->coy == cosy)
+		{
+			ChoisirCouleurDessin(CouleurParNom("black"));
+			EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*proporpix+80)/2, "Game Over", 2);
+			EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur 'q' pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur 'q' pour quitter", 1);
+			while (1){
+				if(Touche() == XK_q){
+					printf("p\n");
+					FermerGraphique();
+					exit(1);
+					break;
+				}else{}
+			}
+		}
+		printf("%d,%d -> ", actuel->cox, actuel->coy);
+		actuel = actuel->suivant;
+	}
+	printf("NULL\n");
+
+																//printf("%d, %d", xfin, yfin);
+}
+
+
+
 /*-----------------------------------------> chercher dernier élément de la liste <-----------------------------------------*/
 Coordonnees dernier(Serpent *serpent){
 	Coordonnees cofin;											//Initialisation des coordonnées du dernier corps

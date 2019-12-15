@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
+
+#define ligneMax 40
+#define colonneMax 60
+#define CYCLE 50000L
+#define proporpix 10
+#define QUANTITEPOMME 5
  
 typedef struct Corps Corps;		//création liste chaînée Corps
 struct Corps{
@@ -32,4 +38,5 @@ void afficherSerpent(Serpent *serpent);
 Coordonnees dernier(Serpent *serpent);
 Coordonnees premier(Serpent *serpent);
 void deplacement(Serpent *serpent, int nouvCox, int nouvCoy);
+void serpentCannibale(Serpent *serpent, int cosx, int cosy);
 #endif /* SERPENT_H */
