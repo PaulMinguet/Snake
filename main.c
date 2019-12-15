@@ -11,12 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <graph.h>
+#include <time.h>
 #include "serpent.h"
 
 #define ligneMax 40
 #define colonneMax 60
 #define CYCLE 50000L
 #define proporpix 10
+#define QUANTITEPOMME 5
 
 int coactux = (colonneMax/2),
 coactuy = (ligneMax/2);
@@ -97,7 +99,7 @@ Coordonnees movSnake(int buttonP,Coordonnees coactu){
 void initAffichage(){
 	ChoisirCouleurDessin(CouleurParNom("grey"));
 	RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);
-	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));
+	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));
 	RemplirRectangle(20,20,colonneMax*proporpix-20,ligneMax*proporpix-20);
 }
 /*------------------------------------actualise l'affichage------------------------------------*/
@@ -106,7 +108,7 @@ void actuAffichage(Coordonnees tete,Coordonnees queue){
 	ChoisirCouleurDessin(CouleurParNom("black"));
 	RemplirRectangle(tete.x*proporpix,tete.y*proporpix,proporpix,proporpix);
 	/*efface la derniere valeur de la queue du snake*/
-	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));
+	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));
 	RemplirRectangle(queue.x*proporpix,queue.y*proporpix,proporpix,proporpix);
 
 
@@ -135,38 +137,94 @@ int main()
 {
 	couleur fond;
 	Coordonnees tete, queue;
-	int map[ligneMax][colonneMax];
+	int pommes[ligneMax][colonneMax];
 	int buttonP = XK_Right;
 	long suivant= Microsecondes()+CYCLE;
-
-	InitialiserGraphique();
+	int i,x,y;
+	srand(time(NULL));	
 	tete.x = 20;
 	tete.y = 26;
+
+	for (x = 0; x < ligneMax; ++x)
+	{
+		for (y = 0; y < colonneMax; ++y)
+		{
+			pommes[x][y] = 0;
+		}
+	}
+
+	InitialiserGraphique();
 	CreerFenetre(proporpix,proporpix,colonneMax*proporpix+20,ligneMax*proporpix+80); 		/*creation fenetre*/
 	EffacerEcran(CouleurParComposante(0, 0, 0));				                            /*coloration du fond en noir*/						
-	ChoisirCouleurDessin(CouleurParComposante(proporpix7, 142, 35));				        /*selection de la couleur*/
+	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));				        /*selection de la couleur*/
     RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);			/*RemplirRectangle(int x,int y,int l,int h);*/
 	Serpent *leSerpent = initSnake();
 	initAffichage();
 
-	for (;fin != 1;)													                   /*début du jeu*/
-	{
-			if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
-			{
-				buttonP = checkMovSnake(buttonP);				                           /*attribue a buttonP la derniere touche préssé*/
+	for ( i = 0; i < QUANTITEPOMME; ++i)
+	{ 		
+		
+		for (;;)
+		{
+			x = rand()%(colonneMax-2);
+			y = rand()%(ligneMax-2);
+
+			if (pommes[x][y] == 0)
+			{ 
+				ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
+				RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
+				pommes[x][y] = 1;
+
+				printf("%d %d\n",x ,y );
+				break;
 			}
+		}
+
+	}
+	for (;fin != 1;)													                   /*début du jeu*/
+	{		
+			if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
+		{
+				buttonP = checkMovSnake(buttonP);				                           /*attribue a buttonP la derniere touche préssé*/
+		}
 
 		if (Microsecondes()>suivant)
 		{
 			tete = movSnake(buttonP,tete);
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
-			actuAffichage(tete,queue);
 
-			suivant= Microsecondes()+CYCLE;
+			if (pommes[tete.x][tete.y] == 1)
+			{
+				insertionFin(leSerpent, queue.x, queue.y);
+				pommes[tete.x][tete.y] = 0;
+				
+				for (;;)
+				{
+					x = rand()%(colonneMax-2);
+					y = rand()%(ligneMax-2);
+
+					if (pommes[x][y] == 0)
+					{ 
+						ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
+						RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
+						pommes[x][y] = 1;
+						printf("%d %d\n",x ,y );
+						break;
+					}
+
+
+				}
+			}
+
+				actuAffichage(tete,queue);
+
+
+
+				suivant= Microsecondes()+CYCLE;
+			}
+			collisionsmurs(tete);
 		}
-		collisionsmurs(tete);w
+		Touche();
+		return EXIT_SUCCESS;
 	}
-	Touche();
-	return EXIT_SUCCESS;
-}
