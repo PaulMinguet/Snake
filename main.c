@@ -197,8 +197,8 @@ int main()
 		
 		for (;;)
 		{
-			x = rand()%(colonneMax+1);
-			y = rand()%(ligneMax+1);
+			x = rand()%(colonneMax-2)+1;
+			y = rand()%(ligneMax-2)+1;
 
 			if (pommes[x][y] == 0)
 			{ 
@@ -220,11 +220,12 @@ int main()
 		}
 
 		if (Microsecondes()>suivant)
-		{
+		{	
+
 			tete = movSnake(buttonP,tete);
+			serpentCannibale(leSerpent,tete.x,tete.y);
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
-			serpentCannibale(leSerpent,tete.x,tete.y);
 			collisionsmurs(tete);
 
 
@@ -235,8 +236,8 @@ int main()
 				
 				for (;;)
 				{
-					x = rand()%(colonneMax+1);
-					y = rand()%(ligneMax+1);
+					x = rand()%(colonneMax-2)+1;
+					y = rand()%(ligneMax-2)+1;
 
 					if (pommes[x][y] == 0)
 					{ 
