@@ -6,7 +6,7 @@
 
 #define ligneMax 40
 #define colonneMax 60
-#define CYCLE 50000L
+#define CYCLE 100000L
 #define proporpix 10
 #define QUANTITEPOMME 5
  

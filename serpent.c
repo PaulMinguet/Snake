@@ -127,17 +127,16 @@ void serpentCannibale(Serpent *serpent, int cosx, int cosy){
 			EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur 'q' pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur 'q' pour quitter", 1);
 			while (1){
 				if(Touche() == XK_q){
-					printf("p\n");
+
 					FermerGraphique();
 					exit(1);
 					break;
 				}else{}
 			}
 		}
-		printf("%d,%d -> ", actuel->cox, actuel->coy);
 		actuel = actuel->suivant;
 	}
-	printf("NULL\n");
+	
 
 																//printf("%d, %d", xfin, yfin);
 }

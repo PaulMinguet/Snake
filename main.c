@@ -71,7 +71,7 @@ la valeur de la derniere touche préssée*/
 				buttonP = XK_Up;break;
 			}
 
-		
+
 			case XK_Down :
 			if (buttonP == XK_Up)
 			{
@@ -79,8 +79,6 @@ la valeur de la derniere touche préssée*/
 			}else{
 				buttonP = XK_Down;break;
 			}
-
-			
 		}
 		
 	}
@@ -137,14 +135,22 @@ void actuAffichage(Coordonnees tete,Coordonnees queue){
 }
 
 /*------------------------------------Collisions Mur----------------------------------*/
-int collisionsmurs(Coordonnees tete){
+void collisionsmurs(Coordonnees tete){
 	int fin = 0;
-	if(tete.x <= 2 || tete.x >= colonneMax-1 || tete.y <= 2 || tete.y >= ligneMax-1){
+	if(tete.x <= 1 || tete.x >= colonneMax || tete.y <= 1 || tete.y >= ligneMax){
 		fin = 1;
 		ChoisirCouleurDessin(CouleurParNom("black"));
 		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*proporpix+80)/2, "Game Over", 2);
 		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur 'q' pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur 'q' pour quitter", 1);
-		return fin;
+		while (1){
+			if(Touche() == XK_q){
+				printf("p\n");
+				FermerGraphique();
+				exit(1);
+
+			}else{}
+		}
+		
 	}
 }
 
@@ -169,7 +175,6 @@ int main()
 	srand(time(NULL));	
 	tete.x = 20;
 	tete.y = 26;
-	int fin =0;
 
 	for (x = 0; x < ligneMax; ++x)
 	{
@@ -207,7 +212,7 @@ int main()
 		}
 
 	}
-	for (;fin != 1;)													                   /*début du jeu*/
+	for (;;)													                   /*début du jeu*/
 	{		
 			if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
 		{
@@ -220,6 +225,7 @@ int main()
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
 			serpentCannibale(leSerpent,tete.x,tete.y);
+			collisionsmurs(tete);
 
 
 			if (pommes[tete.x][tete.y] == 1)
@@ -245,23 +251,10 @@ int main()
 				}
 			}
 
-				actuAffichage(tete,queue);
-
-
-
+	   			actuAffichage(tete,queue);
 				suivant= Microsecondes()+CYCLE;
 			}
-			fin = collisionsmurs(tete);
 		}
-		if(fin == 1){
-		while (1){
-			if(Touche() == XK_q){
-				printf("p\n");
-				FermerGraphique();
-				return EXIT_SUCCESS;
-			}else{}
-		}
-	}
 		Touche();
 		return EXIT_SUCCESS;
 	}
