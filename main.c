@@ -117,12 +117,16 @@ void actuAffichage(Coordonnees tete,Coordonnees queue){
 
 /*------------------------------------Collisions Mur----------------------------------*/
 int collisionsmurs(Coordonnees tete){
-	if(tete.x <= proporpix || tete.x >= colonneMax || tete.y <= 1 || tete.y >= ligneMax){
+	if(tete.x <= 2 || tete.x >= colonneMax-1 || tete.y <= 2 || tete.y >= ligneMax-1){
+		int fin = 0;
 		fin = 1;
+		ChoisirCouleurDessin(CouleurParNom("black"));
 		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Game Over", 2)/2, (ligneMax*proporpix+80)/2, "Game Over", 2);
-		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur une touche pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur une touche pour quitter", 1);
+		EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur 'q' pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur 'q' pour quitter", 1);
+		return fin;
 	}
 }
+
 
 /*------------------------------------Pause----------------------------------*/
 /*int pause(){
@@ -225,6 +229,15 @@ int main()
 			}
 			collisionsmurs(tete);
 		}
+		if(fin == 1){
+		while (1){
+			if(Touche() == XK_q){
+				printf("p\n");
+				FermerGraphique();
+				break;
+			}else{}
+		}
+	}
 		Touche();
 		return EXIT_SUCCESS;
 	}
