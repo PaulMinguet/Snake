@@ -197,8 +197,8 @@ int main()
 		
 		for (;;)
 		{
-			x = rand()%(colonneMax-2);
-			y = rand()%(ligneMax-2);
+			x = rand()%(colonneMax+1);
+			y = rand()%(ligneMax+1);
 
 			if (pommes[x][y] == 0)
 			{ 
@@ -235,8 +235,8 @@ int main()
 				
 				for (;;)
 				{
-					x = rand()%(colonneMax-2);
-					y = rand()%(ligneMax-2);
+					x = rand()%(colonneMax+1);
+					y = rand()%(ligneMax+1);
 
 					if (pommes[x][y] == 0)
 					{ 
