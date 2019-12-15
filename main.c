@@ -166,6 +166,7 @@ void collisionsmurs(Coordonnees tete){
 /*------------------------------------MAIN------------------------------------*/
 int main()
 {
+	float temps = 0;
 	couleur fond;
 	Coordonnees tete, queue;
 	int pommes[ligneMax][colonneMax];
@@ -197,8 +198,8 @@ int main()
 		
 		for (;;)
 		{
-			x = rand()%(colonneMax+1);
-			y = rand()%(ligneMax+1);
+			x = rand()%(colonneMax-2);
+			y = rand()%(ligneMax-2);
 
 			if (pommes[x][y] == 0)
 			{ 
@@ -221,6 +222,8 @@ int main()
 
 		if (Microsecondes()>suivant)
 		{
+			temps = temps + 0.05;
+			printf("%f", temps);
 			tete = movSnake(buttonP,tete);
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
@@ -235,8 +238,8 @@ int main()
 				
 				for (;;)
 				{
-					x = rand()%(colonneMax+1);
-					y = rand()%(ligneMax+1);
+					x = rand()%(colonneMax-2);
+					y = rand()%(ligneMax-2);
 
 					if (pommes[x][y] == 0)
 					{ 
