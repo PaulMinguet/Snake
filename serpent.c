@@ -135,12 +135,27 @@ void serpentCannibale(Serpent *serpent, int cosx, int cosy){
 			}
 		}
 		actuel = actuel->suivant;
-	}
-	
-
-																//printf("%d, %d", xfin, yfin);
+	}																//printf("%d, %d", xfin, yfin);
 }
 
+
+int verifPommePasDansSerpent(Serpent *serpent, int cosx, int cosy){
+	int check = 1;
+	if (serpent == NULL){
+		exit(EXIT_FAILURE);
+	}
+	Corps *actuel = serpent->premier;
+	actuel = actuel->suivant;
+
+	while (actuel != NULL){
+		if (actuel->cox == cosx && actuel->coy == cosy)
+		{
+			check=0;
+		}
+		actuel = actuel->suivant;
+	}			
+	return check;													//printf("%d, %d", xfin, yfin);
+}
 
 
 /*-----------------------------------------> chercher dernier élément de la liste <-----------------------------------------*/
@@ -202,31 +217,5 @@ void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	//inverser coordon
 
 	}
 }
-/*
-int main(){
-	Coordonnees tete;
-	Coordonnees queue;
-	Serpent *leSerpent = initialisation();
-	
-	tete = premier(leSerpent);
-	insertionFin(leSerpent, tete.x, tete.y+1);
-	insertionFin(leSerpent, tete.x, tete.y+2);
-	insertionFin(leSerpent, tete.x, tete.y+3);
-	insertionFin(leSerpent, tete.x, tete.y+4);
-	insertionFin(leSerpent, tete.x, tete.y+5);
-	insertionFin(leSerpent, tete.x, tete.y+6);
-	insertionFin(leSerpent, tete.x, tete.y+7);
-	insertionFin(leSerpent, tete.x, tete.y+8);
-	insertionFin(leSerpent, tete.x, tete.y+9);
-	queue = dernier(leSerpent);
-	printf("queue Avant : %d %d\n", queue.x, queue.y);
-	deplacement(leSerpent, 20, 361);
-	queue = dernier(leSerpent);
 
-	printf("tete : %d %d\n",tete.x, tete.y);
-	printf("queue : %d %d\n", queue.x, queue.y);
-	afficherSerpent(leSerpent);
-	return EXIT_SUCCESS;
-}
-*/
 //gcc serpent.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph

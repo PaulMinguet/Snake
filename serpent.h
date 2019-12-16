@@ -39,4 +39,5 @@ Coordonnees dernier(Serpent *serpent);
 Coordonnees premier(Serpent *serpent);
 void deplacement(Serpent *serpent, int nouvCox, int nouvCoy);
 void serpentCannibale(Serpent *serpent, int cosx, int cosy);
+int verifPommePasDansSerpent(Serpent *serpent, int cosx, int cosy);
 #endif /* SERPENT_H */

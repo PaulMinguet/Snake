@@ -200,7 +200,7 @@ int main()
 			x = rand()%(colonneMax-2)+1;
 			y = rand()%(ligneMax-2)+1;
 
-			if (pommes[x][y] == 0)
+			if (pommes[x][y] == 0 && x != 1 && y != 1)
 			{ 
 				ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
 				RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
@@ -239,7 +239,7 @@ int main()
 					x = rand()%(colonneMax-2)+1;
 					y = rand()%(ligneMax-2)+1;
 
-					if (pommes[x][y] == 0)
+					if (pommes[x][y] == 0 && verifPommePasDansSerpent(leSerpent,x,y)&& x != 1 && y !=1)
 					{ 
 						ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
 						RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
