@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <graph.h>
 
-#define ligneMax 40
-#define colonneMax 60
-#define CYCLE 100000L
+#define ligneMax 60
+#define colonneMax 80
+#define CYCLE 50000L
 #define proporpix 10
 #define QUANTITEPOMME 5
  
@@ -39,4 +39,5 @@ Coordonnees dernier(Serpent *serpent);
 Coordonnees premier(Serpent *serpent);
 void deplacement(Serpent *serpent, int nouvCox, int nouvCoy);
 void serpentCannibale(Serpent *serpent, int cosx, int cosy);
+int verifPommePasDansSerpent(Serpent *serpent, int cosx, int cosy);
 #endif /* SERPENT_H */
