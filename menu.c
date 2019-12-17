@@ -39,7 +39,7 @@ int main()
 	 	SourisPosition();
 	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Jouer", 2)/2 && _Y >= (ligneMax*10+80)/2-20 && _Y <= (ligneMax*10+80)/2){
 	 		FermerGraphique();
-	 		system("./a.out");
+	 		system("./solo");
 	 		return EXIT_SUCCESS;
 	 	}
 	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Multijoueurs", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Multijoueurs", 2)/2 && _Y >= (ligneMax*10+80)/1.75-20 && _Y <= (ligneMax*10+80)/1.75){

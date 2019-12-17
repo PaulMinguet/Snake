@@ -95,23 +95,23 @@
 
     	if (buttonP == XK_Left)
     	{	
-            /*printf("g\n");*/
+            printf("g\n");
     		coactu.x--;
 
     	}
-    	if (buttonP == XK_Right)
+    	else if (buttonP == XK_Right)
     	{
-            /*printf("d\n");*/
+            printf("d\n");
     		coactu.x++;
     	}
-    	if (buttonP == XK_Up)
+    	else if (buttonP == XK_Up)
     	{
-            /*printf("h\n");*/
+            printf("h\n");
     		coactu.y--;
     	}
-    	if (buttonP == XK_Down)
+    	else if (buttonP == XK_Down)
     	{
-            /*printf("b\n");*/
+            printf("b\n");
     		coactu.y++;		
     	}
 
@@ -211,7 +211,7 @@
     {
     	couleur fond;
     	Coordonnees tete, queue;
-    	int pommes[ligneMax][colonneMax];
+    	int pommes[colonneMax][ligneMax];
     	int buttonP = XK_Right;
     	long suivant= Microsecondes()+CYCLE;
     	int i,x,y;
@@ -243,6 +243,7 @@
     			x = rand()%(colonneMax-2)+1;
     			y = rand()%(ligneMax-2)+1;
 
+                printf("%ld\n", sizeof(pommes));
                 printf("x = %d y = %d\n",x ,y );
                 printf("tab : %d\n",pommes[x][y]);
 
