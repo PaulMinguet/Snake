@@ -2,15 +2,15 @@
  
 CC = gcc
 CFLAGS = -Wall \
-         -ansi \
-         -pedantic
+         -ansi 
+         
 
 EXE = snake
-OFILES = menu.o \
-		 jeu.o \
-         main.o \
-         serpent.o \
-         chargement.o 
+OFILES = ./jeu/jeu.o \
+		 ./jeu/serpent.o \
+         ./main.o \
+         ./menu/menu.o \
+         ./menu/chargement.o 
  
 ### BUT PAR DEFAUT ###
  
@@ -18,15 +18,15 @@ but : ${EXE}
  
 ### REGLES ESSENTIELLES ###
  
-jeu.o : jeu.h serpent.h
+jeu.o : ./jeu/jeu.h ./jeu/serpent.h
 
-menu.o : menu.h
+menu.o : ./menu/menu.h
  
-main.o : jeu.h menu.h jeu.h
+main.o : ./jeu/jeu.h ./menu/menu.h ./jeu/serpent.h
 
-chargement.o : jeu.h
+chargement.o : ./jeu/jeu.h
 
-serpent.o : serpent.h
+serpent.o : ./jeu/serpent.h
  
 ${EXE} : ${OFILES}
 	$(CC) $(CFLAGS) -o ${EXE} ${OFILES} -lgraph

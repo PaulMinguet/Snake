@@ -1,7 +1,7 @@
-#include "serpent.h"
-#include "chargement.h"
-#include "jeu.h"
-#include "menu.h"
+#include "./jeu/serpent.h"
+#include "./menu/chargement.h"
+#include "./jeu/jeu.h"
+#include "./menu/menu.h"
 
 int main(int argc, char const *argv[])
 {
