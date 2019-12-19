@@ -62,7 +62,7 @@ int main()
     EffacerEcran(CouleurParComposante(0, 0, 0));
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
 
-    if (/*menu 1 : solo*/){
+    if (/*menu 1 : solo*/ 1 == 1){
     	solo();
     	while (True){
 	 		if(Touche() == XK_space){
@@ -72,7 +72,7 @@ int main()
 	   		}
  		}
     }
-    if (/*menu 2 : multi*/){
+    if (/*menu 2 : multi*/ 1 == 2){
     	multi();
     	while (True){
 	 		if(Touche() == XK_space){
