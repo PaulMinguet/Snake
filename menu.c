@@ -41,7 +41,7 @@ int menu()
 	 		return 1;				/*lance solo*/
 	 		
 	 	}
-	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Multijoueur", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Multijoueurs", 2)/2 && _Y >= (ligneMax*10+80)/1.75-20 && _Y <= (ligneMax*10+80)/1.75){
+	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Multijoueur", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Multijoueur", 2)/2 && _Y >= (ligneMax*10+80)/1.75-20 && _Y <= (ligneMax*10+80)/1.75){
 	 		FermerGraphique();
 	 		return 2;				/*lance multijoueur*/
 	 		
