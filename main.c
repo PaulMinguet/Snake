@@ -13,6 +13,9 @@
 #include <graph.h>
 #include <time.h>
 #include "serpent.h"
+#define codeP1x 20
+#define codebP1y 26
+
 
 
 int coactux = (colonneMax/2),
@@ -23,7 +26,7 @@ coactuy = (ligneMax/2);
 
 Serpent *initSnake(){
 	Coordonnees tete;
-	Serpent *leSerpent = initialisation();
+	Serpent *leSerpent = initialisation(codeP1x, codebP1y);
 	ChoisirCouleurDessin(CouleurParNom("black"));
 	system("/home/paul/IUT/PT11_APL2019/Paul/serpent.c");
 	tete = premier(leSerpent);
@@ -227,6 +230,7 @@ int main()
 			queue = dernier(leSerpent);
 			deplacement(leSerpent,tete.x,tete.y);
 			collisionsmurs(tete);
+			
 
 
 			if (pommes[tete.x][tete.y] == 1)

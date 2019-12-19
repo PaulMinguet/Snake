@@ -15,15 +15,14 @@
 #include <stdio.h>
 #include <graph.h>
 #include "serpent.h"
-#define codebx 20
-#define codeby 26
+
 
 
 
 
 /*------------------------------------------> Initialisation <------------------------------------------*/
 
-Serpent *initialisation(){											//on crée la structure de contrôle Serpent
+Serpent *initialisation(codebx, codeby){											//on crée la structure de contrôle Serpent
 	Serpent *serpent = malloc(sizeof(*serpent));					//On alloue dynamiquement la structure de contrôle
 	Corps *corps = malloc(sizeof(*corps));							//On alloue dynamiquement le premier élément
 
