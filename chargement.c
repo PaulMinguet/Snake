@@ -11,15 +11,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
+#include "chargement.h"
+#include "jeu.h"
 #define ligneMax 60
 #define colonneMax 80
 
 void solo(){
 	ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
-    ChargerImage("./droite.png", 0,(ligneMax*10+80)/12-28, 0, 0, 28, 28);
-    ChargerImage("./gauche.png", 0,(ligneMax*10+80)/12-28+((ligneMax*10+80)/15), 0, 0, 28, 28);
-    ChargerImage("./haut.png", 0,(ligneMax*10+80)/12-28+2*((ligneMax*10+80)/15), 0, 0, 28, 28);
-    ChargerImage("./bas.png", 0,(ligneMax*10+80)/12-28+3*((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/droite.png", 0,(ligneMax*10+80)/12-28, 0, 0, 28, 28);
+    ChargerImage("./img/gauche.png", 0,(ligneMax*10+80)/12-28+((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/haut.png", 0,(ligneMax*10+80)/12-28+2*((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/bas.png", 0,(ligneMax*10+80)/12-28+3*((ligneMax*10+80)/15), 0, 0, 28, 28);
 	EcrireTexte(10, (ligneMax*10+80)/12, "  : mouvement vers la droite", 2);		/*TailleChaineEcran("Snake", 2)/2 : prend la moitié de la taille en pixel de "Snake"*/
     EcrireTexte(10, (ligneMax*10+80)/12+(ligneMax*10+80)/15, "  : mouvement vers la gauche", 2);
     EcrireTexte(10, (ligneMax*10+80)/12+2*((ligneMax*10+80)/15), "  : mouvement vers le haut", 2);
@@ -33,10 +35,10 @@ void solo(){
 
 void multi(){
 	ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
-    ChargerImage("./droite.png", 0,(ligneMax*10+80)/12-28+(ligneMax*10+80)/15, 0, 0, 28, 28);
-    ChargerImage("./gauche.png", 0,(ligneMax*10+80)/12-28+2*((ligneMax*10+80)/15), 0, 0, 28, 28);
-    ChargerImage("./haut.png", 0,(ligneMax*10+80)/12-28+3*((ligneMax*10+80)/15), 0, 0, 28, 28);
-    ChargerImage("./bas.png", 0,(ligneMax*10+80)/12-28+4*((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/droite.png", 0,(ligneMax*10+80)/12-28+(ligneMax*10+80)/15, 0, 0, 28, 28);
+    ChargerImage("./img/gauche.png", 0,(ligneMax*10+80)/12-28+2*((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/haut.png", 0,(ligneMax*10+80)/12-28+3*((ligneMax*10+80)/15), 0, 0, 28, 28);
+    ChargerImage("./img/bas.png", 0,(ligneMax*10+80)/12-28+4*((ligneMax*10+80)/15), 0, 0, 28, 28);
 	EcrireTexte(10, (ligneMax*10+80)/12, "Joueur 1 (serpent noir) :", 2);
 	EcrireTexte(10, (ligneMax*10+80)/12+(ligneMax*10+80)/15, "  : mouvement vers la droite", 2);		/*TailleChaineEcran("Snake", 2)/2 : prend la moitié de la taille en pixel de "Snake"*/
     EcrireTexte(10, (ligneMax*10+80)/12+2*(ligneMax*10+80)/15, "  : mouvement vers la gauche", 2);
@@ -54,7 +56,7 @@ void multi(){
 
 }
 
-int main()
+void chargement(int mode)
 {
 	/* Afficher chargement */
 	InitialiserGraphique();
@@ -62,30 +64,31 @@ int main()
     EffacerEcran(CouleurParComposante(0, 0, 0));
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
 
-    if (/*menu 1 : solo*/ 1 == 1){
+    if (mode == 1){
     	solo();
     	while (True){
 	 		if(Touche() == XK_space){
 	 			FermerGraphique();
+                jeu();
 	 			printf("espace\n");
-	 			return EXIT_SUCCESS;
+	 			
 	   		}
  		}
     }
-    if (/*menu 2 : multi*/ 1 == 2){
+    if (mode == 2){
     	multi();
     	while (True){
 	 		if(Touche() == XK_space){
 	 			FermerGraphique();
+                jeuM();
 	 			printf("espace\n");
-	 			return EXIT_SUCCESS;
+	 			
 	   		}
  		}
     }
 
     
 	FermerGraphique();
-	return EXIT_SUCCESS;
 }
 
 /*gcc menu.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph*/

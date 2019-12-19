@@ -3,13 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
-
-#define ligneMax 60
-#define colonneMax 80
-#define CYCLE 50000L
-#define proporpix 10
-#define QUANTITEPOMME 5
- 
+#include "serpent.h"
 typedef struct Corps Corps;		//création liste chaînée Corps
 struct Corps{
 	int cox, coy;				//coordonnées x et y de chaque partie de la liste
@@ -35,14 +29,17 @@ struct Button{
 	int P1, P2;
 };
 
-Serpent *initialisation();
-void insertionDebut(Serpent *serpent, int nvCox, int nvCoy);
-void insertionFin(Serpent *serpent, int nvCox, int nvCoy);
-void suppression(Serpent *serpent);
-void afficherSerpent(Serpent *serpent);
-Coordonnees dernier(Serpent *serpent);
-Coordonnees premier(Serpent *serpent);
-void deplacement(Serpent *serpent, int nouvCox, int nouvCoy);
-void serpentCannibale(Serpent *serpent, int cosx, int cosy);
-int verifPommePasDansSerpent(Serpent *serpent, int cosx, int cosy);
+Serpent *initSnake();
+Button checkMovSnake(Button buttonP);
+Coordonnees movSnake(Button buttonP,Coordonnees coactu);
+Coordonnees movSnakeP2(Button buttonP ,Coordonnees coactu);
+void initAffichage();
+void actuAffichageP1(Coordonnees tete,Coordonnees queue);
+void actuAffichageP2(Coordonnees tete,Coordonnees queue);
+void collisionsmurs(Coordonnees tete);
+void timer();
+void addscore(int nvscore);
+int jeu();
+int jeuM();
+
 #endif /* SERPENT_H */
