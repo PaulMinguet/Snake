@@ -6,7 +6,5 @@
 int main(int argc, char const *argv[])
 {
 	chargement(menu());
-	
-	
 	return 0;
 }

@@ -10,15 +10,15 @@
 #define proporpix 10
 #define QUANTITEPOMME 5
  
-typedef struct Corps Corps;		//création liste chaînée Corps
+typedef struct Corps Corps;		/*création liste chaînée Corps*/
 struct Corps{
-	int cox, coy;				//coordonnées x et y de chaque partie de la liste
-	Corps *suivant;				//renvoie vers l'élément suivant en mémoire
+	int cox, coy;				/*coordonnées x et y de chaque partie de la liste*/
+	Corps *suivant;				/*renvoie vers l'élément suivant en mémoire*/
 };
 
-typedef struct Serpent Serpent;		//création de la structure de contrôle (la tête)
+typedef struct Serpent Serpent;		/*création de la structure de contrôle (la tête)*/
 struct Serpent{
-	Corps *premier;				//pointe vers le premier élément
+	Corps *premier;				/*pointe vers le premier élément*/
 };
 
 typedef struct Coordonnees Coordonnees;

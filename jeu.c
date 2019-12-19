@@ -35,7 +35,6 @@ Serpent *initSnake(){
    Coordonnees tete;
    Serpent *leSerpent = initialisation();
    ChoisirCouleurDessin(CouleurParNom("black"));
-   system("/home/paul/IUT/PT11_APL2019/Paul/serpent.c");
    tete = premier(leSerpent);
    for(; t<=9; t++){
       insertionFin(leSerpent, tete.x, tete.y+t);
@@ -123,6 +122,10 @@ Button checkMovSnake(Button buttonP){
                 break;
             }
         }
+
+        case XK_Escape :
+        FermerGraphique();
+        exit(1);
         
     }
 
@@ -225,7 +228,7 @@ void collisionsmurs(Coordonnees tete){
       EcrireTexte((colonneMax*proporpix+20)/2-TailleChaineEcran("Appuyez sur 'q' pour quitter", 1)/2, (ligneMax*proporpix+80)/2+20, "Appuyez sur 'q' pour quitter", 1);
       while (1){
          if(Touche() == XK_q){
-    				/*printf("p\n");*/
+    				
             FermerGraphique();
             exit(1);
 
@@ -253,7 +256,7 @@ void timer(){
         secondes = 0;
         minutes++;
     }
-			/*printf("%02d\n", secondes);*/
+		
 }
 }
 
@@ -266,7 +269,7 @@ void addscore(int nvscore){
   sprintf(nbscore, " %07d ", score);
   EcrireTexte(colonneMax*8.5,ligneMax*proporpix+10+45,nbscore, 2);
   score = score + nvscore;
-		/*printf("%07d\n", score);*/
+		
 }
 
 
@@ -311,18 +314,12 @@ int jeu()
      x = rand()%(colonneMax-2)+1;
      y = rand()%(ligneMax-2)+1;
 
-     printf("%ld\n", sizeof(pommes));
-     printf("x = %d y = %d\n",x ,y );
-     printf("tab : %d\n",pommes[x][y]);
-
      if (pommes[x][y] == 0 && x != 1 && y != 1)
      { 
         ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
         RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
         pommes[x][y] = 1;
 
-        printf("pommes : %d\n", i);
-        printf("%d %d\n",x ,y );
         break;
     }
 }
@@ -357,9 +354,6 @@ int jeu()
         { placepomme = 0;
            x = rand()%(colonneMax-2)+1;
            y = rand()%(ligneMax-2)+1;
-           printf("    add %ld\n", sizeof(pommes));
-           printf("    add x = %d y = %d\n",x ,y );
-           printf("    add tab : %d\n",pommes[x][y]);
 
            if (pommes[x][y] == 0 && verifPommePasDansSerpent(leSerpent,x,y)&& x != 1 && y !=1)
            { 
@@ -368,7 +362,6 @@ int jeu()
               ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
               RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
               pommes[x][y] = 1;
-              printf("place pomme okey\n",x ,y );
               placepomme = 1;
 
 
@@ -398,7 +391,7 @@ int jeuM()
     key.P2 = XK_d;
 
     long suivant= Microsecondes()+CYCLE;
-    int i,x,y;
+    int i,x,y,placepomme;
     srand(time(NULL));  
     teteP1.x = 20;
     teteP1.y = 26;
@@ -435,8 +428,6 @@ int jeuM()
                 ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
                 RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
                 pommes[x][y] = 1;
-
-                printf("%d %d\n",x ,y );
                 break;
             }
         }
@@ -455,7 +446,7 @@ int jeuM()
 
         if (Microsecondes()>suivant)
         {   
-
+            timer();
             teteP1 = movSnake(key,teteP1);
             teteP2 = movSnakeP2(key,teteP2);
 
@@ -489,7 +480,6 @@ int jeuM()
                         ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
                         RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
                         pommes[x][y] = 1;
-                        printf("%d %d\n",x ,y );
                         break;
                     }
 
@@ -502,8 +492,9 @@ int jeuM()
                 insertionFin(leConcurrent, queueP2.x, queueP2.y);
                 pommes[teteP2.x][teteP2.y] = 0;
                 
-                for (;;)
+                do
                 {
+                  placepomme = 0;
                     x = rand()%(colonneMax-2)+1;
                     y = rand()%(ligneMax-2)+1;
 
@@ -512,12 +503,12 @@ int jeuM()
                         ChoisirCouleurDessin(CouleurParComposante(255, 0, 0));
                         RemplirRectangle(x*proporpix,y*proporpix,proporpix,proporpix);
                         pommes[x][y] = 1;
-                        printf("%d %d\n",x ,y );
-                        break;
+                        placepomme = 1;
+                        
                     }
 
 
-                }
+                }while(placepomme != 1);
             }
 
             actuAffichageP1(teteP1,queueP1);
