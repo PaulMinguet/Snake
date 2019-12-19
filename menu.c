@@ -29,7 +29,7 @@ int main()
     ChoisirCouleurDessin(CouleurParComposante(218, 165, 32));
     EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Snake", 2)/2, (ligneMax*10+80)/6, "Snake", 2);		/*TailleChaineEcran("Snake", 2)/2 : prend la moitié de la taille en pixel de "Snake"*/
     ChoisirCouleurDessin(CouleurParComposante(218, 165, 32));
-    EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Jouer", 2)/2, (ligneMax*10+80)/2, "Jouer", 2);
+    EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Solo", 2)/2, (ligneMax*10+80)/2, "Solo", 2);
     EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Multijoueurs", 2)/2, (ligneMax*10+80)/1.75, "Multijoueurs", 2);
     ChoisirCouleurDessin(CouleurParComposante(100, 100, 100));
     EcrireTexte((colonneMax*10+20)/2-TailleChaineEcran("Quitter", 2)/2, (ligneMax*10+80)/1.2, "Quitter", 2);
@@ -45,12 +45,12 @@ int main()
 	 	}
 	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Multijoueurs", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Multijoueurs", 2)/2 && _Y >= (ligneMax*10+80)/1.75-20 && _Y <= (ligneMax*10+80)/1.75){
 	 		FermerGraphique();
-	 		
+
 	 		return 2;				/*lance multijoueur*/
 	 		return EXIT_SUCCESS;
 	 	}
 	 	if(_X >= (colonneMax*10+20)/2-TailleChaineEcran("Quitter", 2)/2 && _X <= (colonneMax*10+20)/2+TailleChaineEcran("Quitter", 2)/2 && _Y >= (ligneMax*10+80)/1.2-20 && _Y <= (ligneMax*10+80)/1.2){
-	 		return 3;				/*lance options*/
+	 		return 3;
 	 		return EXIT_SUCCESS;
 	 	}
 	}
