@@ -232,7 +232,7 @@ void collisionsmurs(Coordonnees tete){
             FermerGraphique();
             exit(1);
 
-        }else{}
+        }
     }
 
 }
@@ -300,9 +300,9 @@ int jeu()
 
  InitialiserGraphique();
     	CreerFenetre(proporpix,proporpix,colonneMax*proporpix+20,ligneMax*proporpix+80); 		/*creation fenetre*/
-    	EffacerEcran(CouleurParComposante(0, 0, 0));				                            /*coloration du fond en noir*/						
-    	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));			          	        /*selection de la couleur*/
-        RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);			/*RemplirRectangle(int x,int y,int l,int h);*/
+    	EffacerEcran(CouleurParComposante(0, 0, 0));				                                /*coloration du fond en noir*/						
+    	ChoisirCouleurDessin(CouleurParComposante(107, 142, 35));			          	          /*selection de la couleur*/
+        RemplirRectangle(proporpix,proporpix,colonneMax*proporpix,ligneMax*proporpix);		/*RemplirRectangle(int x,int y,int l,int h);*/
  Serpent *leSerpent = initSnake();
  initAffichage();
 

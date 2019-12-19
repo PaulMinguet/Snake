@@ -22,7 +22,7 @@
 
 /*------------------------------------------> Initialisation <------------------------------------------*/
 
-Serpent *initialisation(int codebx, int codeby){											/*on crée la structure de contrôle Serpent*/
+Serpent *initialisation(int codebx, int codeby){					/*on crée la structure de contrôle Serpent*/
 	Serpent *serpent = malloc(sizeof(*serpent));					/*On alloue dynamiquement la structure de contrôle*/
 	Corps *corps = malloc(sizeof(*corps));							/*On alloue dynamiquement le premier élément*/
 
@@ -130,7 +130,7 @@ void serpentCannibale(Serpent *serpent, int cosx, int cosy){
 					FermerGraphique();
 					exit(1);
 					break;
-				}else{}
+				}
 			}
 		}
 		actuel = actuel->suivant;
