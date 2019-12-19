@@ -201,22 +201,6 @@ void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	/*inverser coordon
 	tampony = actuel->coy;
 	actuel->cox = nouvCox;
 	actuel->coy = nouvCoy;
-	
-
-	/*Serpent *nextSerpent=serpent;
-	int sauveX = nextSerpent->cox;
-	int sauveY = nextSerpent->coy;
-
-	while (nextSerpent->suivant!=NULL) {
-		nextSerpent = nextSerpent->suivant;
-		int tempX = nextSerpent->cox, tempY = nextSerpent->coy;
-		nextSerpent->cox = sauveX;
-		nextSerpent->coy = sauveY;
-		sauveX = nextSerpent->cox;
-		sauveY = nextSerpent->coy;
-
-	}*/
-	
 	for(;actuel->suivant != NULL;){
 		if(actuel->suivant == NULL){break;}
 		actuel = actuel->suivant;
