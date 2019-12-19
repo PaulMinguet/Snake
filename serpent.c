@@ -193,7 +193,7 @@ Coordonnees premier(Serpent *serpent){
 	return codeb;
 }
 
-void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	/*inverser coordonnées
+void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	/*inverser coordonnées*/
 	int tamponx, tampony, tamponsx, tamponsy;
 	Corps *actuel = serpent->premier;
 	Corps *suivant = suivant;
@@ -201,10 +201,26 @@ void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	/*inverser coordon
 	tampony = actuel->coy;
 	actuel->cox = nouvCox;
 	actuel->coy = nouvCoy;
+	
+
+	/*Serpent *nextSerpent=serpent;
+	int sauveX = nextSerpent->cox;
+	int sauveY = nextSerpent->coy;
+
+	while (nextSerpent->suivant!=NULL) {
+		nextSerpent = nextSerpent->suivant;
+		int tempX = nextSerpent->cox, tempY = nextSerpent->coy;
+		nextSerpent->cox = sauveX;
+		nextSerpent->coy = sauveY;
+		sauveX = nextSerpent->cox;
+		sauveY = nextSerpent->coy;
+
+	}*/
+	
 	for(;actuel->suivant != NULL;){
 		if(actuel->suivant == NULL){break;}
 		actuel = actuel->suivant;
-		tamponsx = actuel->cox;									/*tamponsx --> tampon suivant*/
+		tamponsx = actuel->cox;					/*tamponsx --> tampon suivant*/						
 		tamponsy = actuel->coy;
 		actuel->cox = tamponx;
 		actuel->coy = tampony;
@@ -216,6 +232,7 @@ void deplacement(Serpent *serpent, int nouvCox, int nouvCoy){	/*inverser coordon
 		actuel->coy = tamponsy;
 
 	}
+	
 }
 
 /*gcc serpent.c -I/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/include -L/home/paul/IUT/PT/bibliotheque-graphique-iut-1.1/src/lib -lgraph*/

@@ -95,23 +95,23 @@
 
     	if (buttonP == XK_Left)
     	{	
-            printf("g\n");
+            /*printf("g\n");*/
     		coactu.x--;
 
     	}
     	else if (buttonP == XK_Right)
     	{
-            printf("d\n");
+            /*printf("d\n");*/
     		coactu.x++;
     	}
     	else if (buttonP == XK_Up)
     	{
-            printf("h\n");
+            /*printf("h\n");*/
     		coactu.y--;
     	}
     	else if (buttonP == XK_Down)
     	{
-            printf("b\n");
+            /*printf("b\n");*/
     		coactu.y++;		
     	}
 
@@ -262,7 +262,7 @@
     	}
     	for (;;)													                            /*début du jeu*/
     	{		
-    			if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
+    		if (ToucheEnAttente())								                           /*verifie si il y a une touche dans le tampon*/
     		{
     				buttonP = checkMovSnake(buttonP);				                           /*attribue a buttonP la derniere touche préssé*/
     		}
