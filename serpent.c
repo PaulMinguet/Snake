@@ -23,11 +23,11 @@
 
 /*------------------------------------------> Initialisation <------------------------------------------*/
 
-Serpent *initialisation(){											//on crée la structure de contrôle Serpent*/
-	Serpent *serpent = malloc(sizeof(*serpent));					//On alloue dynamiquement la structure de contrôle*/
-	Corps *corps = malloc(sizeof(*corps));							//On alloue dynamiquement le premier élément*/
+Serpent *initialisation(){											/*on crée la structure de contrôle Serpent*/
+	Serpent *serpent = malloc(sizeof(*serpent));					/*On alloue dynamiquement la structure de contrôle*/
+	Corps *corps = malloc(sizeof(*corps));							/*On alloue dynamiquement le premier élément*/
 
-	if (serpent == NULL || corps == NULL){							//Si les allocations dynamiques n'ont pas fonctionné: exit*/
+	if (serpent == NULL || corps == NULL){							/*Si les allocations dynamiques n'ont pas fonctionné: exit*/
 		exit(EXIT_FAILURE);
 }
 
